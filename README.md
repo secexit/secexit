@@ -1,5 +1,5 @@
 # secexit
-
+--
 **secexit** blocks unauthorized outbound traffic using eBPF.
 
 _Zero config. Zero latency. Zero trust._
@@ -178,7 +178,3 @@ Ensure the environment variable `RUST_LOG=info` is set. For raw kernel logs, che
 
 **What's with the name?**
 A bad joke relating to mainframes (No relation to IBM !).
-
-```
-
-```
