@@ -1,0 +1,18 @@
+[package]
+name = "secexit-daemon"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+secexit-common = { path = "../secexit-common" }
+aya = { workspace = true }
+aya-log = { workspace = true }
+tokio = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+libc = { workspace = true }
+clap = { workspace = true }
+
+async-trait = "0.1.89"

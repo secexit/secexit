@@ -1,0 +1,6 @@
+{
+  "revision": 1,
+  "blocked_domains": ["www.google.com"],
+  "blocked_ips": [],
+  "lockdown_mode": false
+}

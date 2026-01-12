@@ -1,0 +1,32 @@
+[workspace]
+resolver = "3"
+members = [
+    "secexit-common",
+    "secexit-shim",
+    "secexit-ebpf",
+    "secexit-daemon",
+    "xtask"
+]
+default-members = [
+    "secexit-common",
+    "secexit-shim",
+    "secexit-daemon",
+    "xtask"
+]
+
+[workspace.dependencies]
+secexit-common = { path = "./secexit-common" }
+libc = "1.0.0-alpha.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.49.0", features = ["full"] }
+aya = { version = "0.13.1", features = ["async_tokio"] }
+aya-ebpf = "0.1.1"
+aya-log-ebpf = "0.1.0"
+aya-log = "0.2.1"
+reqwest = { version = "0.13.1", default-features = false, features = ["blocking","json"] }
+env_logger = "0.10"
+log = "0.4"
+anyhow = "1.0"
+dirs = "6.0.0"
+clap = { version = "4.5.54", features = ["derive","env"] }

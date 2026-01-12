@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+
+  ci:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+
+      - name: format
+        run: make format
+
+      - name: clean
+        run: make clean
+
+      - name: setup
+        run: make setup-env
+
+      - name: build
+        run: make build
+
+      - name: check
+        run: make check
+
+      - name: clippy
+        run: make clippy
+
+      - name: test
+        run: make test-all
+        env:
+          RUST_LOG: info

@@ -1,0 +1,77 @@
+name: Build binaries
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Standard Linux (Ubuntu, Debian, Fedora)
+          - target: x86_64-unknown-linux-gnu
+            suffix: gnu
+            # libc-dev is standard, no extra deps usually needed
+            install_deps: sudo apt-get update && sudo apt-get install -y llvm-dev libclang-dev
+
+          # TODO Alpine Linux / Static Binaries
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Rust Nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src
+
+      - name: Install Rust Stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+
+      - name: Install bpf-linker
+        run: |
+          if ! command -v bpf-linker &> /dev/null; then
+            cargo install bpf-linker
+          fi
+
+      - name: Install System Deps
+        run: ${{ matrix.install_deps }}
+
+      - name: Build eBPF
+        run: make build-ebpf
+
+      - name: Build Daemon
+        run: cargo +stable build --release --target ${{ matrix.target }} --package secexit-daemon
+
+      - name: Build Shim
+        run:
+          cargo +stable build --release --target ${{ matrix.target }} --package secexit-shim
+
+      - name: Prepare Artifacts
+        shell: bash
+        run: |
+          mkdir -p dist
+          
+          # copy Daemon
+          cp target/${{ matrix.target }}/release/secexit-daemon dist/secexit-daemon-${{ matrix.suffix }}
+          
+          # copy Shim (Handle .so naming)
+          # Note: On musl, it might still be named .so or .a depending on configuration
+          cp target/${{ matrix.target }}/release/libsecexit_shim.so dist/libsecexit_shim-${{ matrix.suffix }}.so
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: secexit-binaries-${{ matrix.suffix }}
+          path: dist/*
