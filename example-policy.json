@@ -1,0 +1,6 @@
+{
+  "revision": 1,
+  "blocked_domains": ["example.com", "evil.com", "www.google.com"],
+  "blocked_ips": ["151.101.1.91"],
+  "lockdown_mode": false
+}
