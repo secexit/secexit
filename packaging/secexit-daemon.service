@@ -1,0 +1,14 @@
+[Unit]
+Description=secexit egress filter daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=SECEXIT_POLICY=/etc/secexit/policy.json
+ExecStart=/usr/bin/secexit-daemon
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target
