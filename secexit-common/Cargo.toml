@@ -2,6 +2,13 @@
 name = "secexit-common"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "secexit-common lib."
+repository = "https://github.com/secexit/secexit"
+homepage = "https://github.com/secexit/secexit"
+readme = "../README.md"
+keywords = ["ebpf", "security", "egress", "firewall"]
+categories = ["network-programming", "os::linux-apis"]
 
 [dependencies]
 serde = { workspace = true }

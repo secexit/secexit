@@ -1,14 +1,12 @@
 [workspace]
 resolver = "3"
 members = [
-    "secexit-common",
     "secexit-shim",
     "secexit-ebpf",
     "secexit-daemon",
     "xtask"
 ]
 default-members = [
-    "secexit-common",
     "secexit-shim",
     "secexit-daemon",
     "xtask"

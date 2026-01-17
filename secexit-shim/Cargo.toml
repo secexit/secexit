@@ -2,12 +2,19 @@
 name = "secexit-shim"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Userspace DNS blocking shim for secexit."
+repository = "https://github.com/secexit/secexit"
+homepage = "https://github.com/secexit/secexit"
+readme = "../README.md"
+keywords = ["security", "egress", "dns", "ld_preload"]
+categories = ["network-programming", "os::linux-apis"]
 
 [lib]
 crate-type = ["cdylib"] # Important: Makes it a .so file
 
 [dependencies]
-secexit-common = { workspace = true }
+secexit-common = { path = "../secexit-common"}
 libc = { workspace = true }
 serde_json = { workspace = true }
 clap = { workspace = true }
