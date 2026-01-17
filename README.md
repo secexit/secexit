@@ -117,6 +117,26 @@ curl: (6) Could not resolve host: [www.google.com](https://www.google.com)
 ```
 
 
+## Installation
+
+### RPM (dnf)
+
+For distro package, build with `packaging/secexit.spec` (see `docs/packaging.md`), or install from COPR:
+
+```bash
+sudo dnf copr enable secexit/secexit
+sudo dnf install secexit
+```
+
+### Crates.io
+
+After publishing the crates, install the daemon with:
+
+```bash
+cargo install secexit-daemon
+
+```
+
 ## Development
 
 The project consists of three main components:

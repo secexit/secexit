@@ -30,3 +30,10 @@ run:
 
 run2:
 	sudo RUST_LOG=info ./target/release/secexit-daemon
+
+publish-package:
+
+publish-crates:
+	cargo publish -p secexit-shim
+	cargo publish -p secexit-daemon
+

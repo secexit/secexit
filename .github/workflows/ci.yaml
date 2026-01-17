@@ -3,7 +3,9 @@ name: ci
 on:
   push:
     branches: [ "main" ]
-
+  pull_request:
+    branches: [ "*" ]
+    
 env:
   CARGO_TERM_COLOR: always
 
