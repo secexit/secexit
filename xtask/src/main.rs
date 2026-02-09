@@ -58,6 +58,7 @@ fn build_ebpf(release: bool) -> anyhow::Result<()> {
     let status = Command::new("cargo")
         .current_dir(workspace_dir)
         .args(&args)
+        .env_remove("RUSTFLAGS")
         .status()
         .context("Failed to build eBPF program")?;
 

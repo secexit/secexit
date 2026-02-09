@@ -1,5 +1,6 @@
 build-ebpf:
 	cargo xtask build-ebpf --release
+	cp target/bpfel-unknown-none/release/secexit-ebpf secexit-daemon/src/.
 build-daemon:
 	cargo build --package secexit-daemon --release
 build-shim:
@@ -30,3 +31,11 @@ run:
 
 run2:
 	sudo RUST_LOG=info ./target/release/secexit-daemon
+
+publish-package:
+	cargo package
+publish-crates:
+	cargo publish -p secexit-common --dry-run
+	cargo publish -p secexit-shim --dry-run
+	cargo publish -p secexit-daemon
+

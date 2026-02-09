@@ -2,9 +2,16 @@
 name = "secexit-daemon"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Egress control daemon using eBPF."
+repository = "https://github.com/secexit/secexit"
+homepage = "https://github.com/secexit/secexit"
+readme = "../README.md"
+keywords = ["ebpf", "security", "egress", "firewall"]
+categories = ["network-programming", "os::linux-apis"]
 
 [dependencies]
-secexit-common = { path = "../secexit-common" }
+secexit-common = { path = "../secexit-common", version = "0.1.0" }
 aya = { workspace = true }
 aya-log = { workspace = true }
 tokio = { workspace = true }

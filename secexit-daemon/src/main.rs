@@ -101,10 +101,12 @@ async fn main() -> Result<(), anyhow::Error> {
     let args = Args::parse();
     let policy = load_policy(&args.policy).await;
 
-    // TODO: need to clean this up
-    let mut bpf = Ebpf::load(include_bytes_aligned!(
-        "../../target/bpfel-unknown-none/release/secexit-ebpf"
-    ))?;
+    // IMPORTANT: secexit-ebpf must be built and copied from
+    //            target/bpfel-unknown-none/release/secexit-ebpf
+    //            to
+    //            secexit-daemon/src/.
+    //
+    let mut bpf = Ebpf::load(include_bytes_aligned!("secexit-ebpf"))?;
 
     if let Err(e) = aya_log::EbpfLogger::init(&mut bpf) {
         log::warn!("failed to initialize eBPF logger: {}", e);
